@@ -1,6 +1,5 @@
 import express, {Request, Response, NextFunction, Application, ErrorRequestHandler} from 'express';
 import WalletController from '../controllers/user/walletController';
-import userRoutes from "./userRoutes";
 
 const walletController = new WalletController();
 
