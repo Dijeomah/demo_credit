@@ -6,10 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/app.ts",
-    "start": "npm run build && node build/app.js",
+    "start": "node ./dist/app.js",
     "migrate": "knex migrate:latest --knexfile db/knexfile.js",
     "seed": "knex seed:run --knexfile db/knexfile.js",
-    "build": "rimraf ./build && tsc"
+    "build": "tsc"
   },
   "keywords": [],
   "author": "",
