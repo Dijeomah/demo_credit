@@ -21,10 +21,12 @@ authRoutes.post('/login', async (req: Request, res: Response, next: NextFunction
     const {email, password} = req.body;
     try {
         const token = await authService.login(email, password);
+        res.cookie('jwt', token, { httpOnly: true });
         res.send({token});
         localStorage.setItem('user_access_token', token);
     } catch (error: any) {
         res.status(400).send(error.message);
     }
 });
+
 export default authRoutes;

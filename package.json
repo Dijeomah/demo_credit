@@ -6,9 +6,10 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "nodemon ./src/app.ts",
-    "start": "node ./dist/app.js",
+    "start": "npm run build && node build/app.js",
     "migrate": "knex migrate:latest --knexfile db/knexfile.js",
-    "seed": "knex seed:run --knexfile db/knexfile.js"
+    "seed": "knex seed:run --knexfile db/knexfile.js",
+    "build": "rimraf ./build && tsc"
   },
   "keywords": [],
   "author": "",
@@ -39,6 +40,7 @@
     "@types/node": "^18.15.11",
     "@types/node-localstorage": "^1.3.0",
     "@types/supertest": "^2.0.12",
+    "rimraf": "^4.4.1",
     "supertest": "^6.3.3",
     "ts-jest": "^29.1.0"
   }

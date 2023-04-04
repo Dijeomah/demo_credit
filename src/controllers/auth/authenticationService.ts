@@ -49,4 +49,5 @@ export default class AuthenticationService {
 
         return jwt.sign({id: user.id}, 'secret', { expiresIn: '10m' });
     }
+
 }

@@ -102,6 +102,53 @@ export default class WalletController {
         return ['Account Funded with : ' + amount, 'Wallet Balance: ' + new_balance];
     }
 
+
+    public async walletBalance(token: any): Promise<string[]> {
+        const decodedToken = jwt.verify(token, 'secret') as { id: number };
+
+        //check the logged in token
+        let localToken = localStorage.getItem('user_access_token');
+
+        if (token !== localToken) {
+            throw new Error('Access denied');
+        }
+        const userData = await this.db('users').where({id: decodedToken.id}).first();
+
+        if (!userData) {
+            throw new Error('User not found');
+        }
+
+        let user_u_id = userData.id;
+
+        const walletData = await this.db('wallets').where({user_id: user_u_id}).first();
+
+        return walletData.main_balance;
+    }
+
+    public async walletTransactions(token: any): Promise<string[]> {
+
+        const decodedToken = jwt.verify(token, 'secret') as { id: number };
+
+        //check the logged in token
+        let localToken = localStorage.getItem('user_access_token');
+
+        if (token !== localToken) {
+            throw new Error('Access denied');
+        }
+        const userData = await this.db('users').where({id: decodedToken.id}).first();
+
+        if (!userData) {
+            throw new Error('User not found');
+        }
+
+        let user_u_id = userData.id;
+
+        const transactionHistory = await this.db('transactions').select('*').where({user_id: user_u_id});
+
+        return transactionHistory;
+    }
+
+
     public async transferFund(token: any, amount: any, id: any): Promise<string[]> {
         const decodedToken = jwt.verify(token, 'secret') as { id: number };
 
