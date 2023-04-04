@@ -37,6 +37,6 @@ app.use((req: Request, res: Response, next: NextFunction) => {
 
 app.use(errorHandler);
 
-const PORT: number = Number(process.env.PORT)
+const PORT: number = Number(process.env.PORT|| 3000)
 
-const server: Server = app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`));
+const server: Server = app.listen(PORT , () => console.log(`Server is running on Port ${PORT}`));
