@@ -30,5 +30,5 @@ app.use((req, res, next) => {
     next(authMiddleware_1.authMiddleware);
 });
 app.use(errorHandler);
-const PORT = Number(process.env.PORT);
+const PORT = Number(process.env.PORT || 3000);
 const server = app.listen(PORT, () => console.log(`Server is running on Port ${PORT}`));

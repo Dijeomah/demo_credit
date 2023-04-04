@@ -11,7 +11,7 @@ module.exports = {
       host : '127.0.0.1',
       port : 3306,
       user : 'root',
-      password : 'Click!@#',
+      password : '',
       database : 'demo_credit'
     }
   },
@@ -32,6 +32,7 @@ module.exports = {
       tableName: 'knex_migrations'
     }
   },
+
   production: {
     client: 'mysql',
     connection: {
