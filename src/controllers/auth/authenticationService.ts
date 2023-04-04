@@ -1,6 +1,7 @@
 import bcrypt from 'bcrypt';
 import jwt from 'jsonwebtoken';
 import knex from 'knex';
+import {json} from "body-parser";
 
 
 //Database file
@@ -22,16 +23,17 @@ export default class AuthenticationService {
         this.db = knexDb;
     }
 
-    public async register(name: string, email: string, password: string): Promise<void> {
+    public async register(name: string, email: string, password: string): Promise<string> {
         const hashedPassword = await bcrypt.hash(password, 10);
         const timestamp = Date.now();
-        await this.db('users').insert({
+        await this.db<User>('users').insert({
             name,
             email,
             password: hashedPassword,
             created_at:timestamp,
             updated_at:timestamp,
         });
+        return 'Registration Success';
     }
 
     public async login(email: string, password: string): Promise<string> {
