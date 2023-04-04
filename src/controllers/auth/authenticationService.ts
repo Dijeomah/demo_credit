@@ -24,7 +24,8 @@ export default class AuthenticationService {
 
     public async register(name: string, email: string, password: string): Promise<string> {
         const hashedPassword = await bcrypt.hash(password, 10);
-        const timestamp = Date.now();
+        const now = new Date();
+        const timestamp = now.toISOString().replace("T", " ").slice(0, -1);
         await this.db('users').insert({
             name,
             email,

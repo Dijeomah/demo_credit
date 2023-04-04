@@ -143,9 +143,7 @@ export default class WalletController {
 
         let user_u_id = userData.id;
 
-        const transactionHistory = await this.db('transactions').select('*').where({user_id: user_u_id});
-
-        return transactionHistory;
+        return this.db('transactions').select('*').where({user_id: user_u_id});
     }
 
 
@@ -192,7 +190,8 @@ export default class WalletController {
 
         console.log(Number(new_user_balance).toFixed(2));
 
-        const timestamp = Date.now();
+        const now = new Date();
+        const timestamp = now.toISOString().replace("T", " ").slice(0, -1);
         await this.db('wallets').where({user_id: user_u_id}).update({
             amount: amount,
             main_balance: new_user_balance,
@@ -262,7 +261,9 @@ export default class WalletController {
         // return receiverWalletData;
         const new_user_balance = userWalletData.main_balance - amount;
 
-        const timestamp = Date.now();
+        const now = new Date();
+        const timestamp = now.toISOString().replace("T", " ").slice(0, -1);
+
         await this.db('wallets').where({user_id: user_u_id}).update({
             amount: amount,
             main_balance: new_user_balance,
