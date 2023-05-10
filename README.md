@@ -1,6 +1,6 @@
 # DEMO CREDIT TEST APP
 
-* This project is a simple demo credit application for lendqr test.
+* This project is a simple demo credit application for learning NodeJs, Typescript and Knexjs.
 
 # Routes
 
